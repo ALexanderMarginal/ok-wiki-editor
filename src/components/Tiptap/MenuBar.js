@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import React, {useMemo} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Tiptap.scss';
-import getButtons from './tools/getButtons';
+import useMenuBar from './hooks/useMenuBar';
 import buttonStyles from './Button.module.scss';
 
 const Button = ({
@@ -37,15 +37,7 @@ Button.defaultProps = {
 };
 
 const MenuBar = ({editor}) => {
-    const buttons = useMemo(() => {
-        if (editor) {
-            return getButtons(editor).map(button => ({
-                ...button,
-                key: `${button.id}_${button.title}`,
-            }));
-        }
-        return [];
-    }, [editor]);
+    const {buttons} = useMenuBar(editor);
 
     if (!editor) {
         return null;
