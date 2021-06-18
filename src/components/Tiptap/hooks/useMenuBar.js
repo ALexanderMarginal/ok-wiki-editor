@@ -10,8 +10,11 @@ const useMenuBar = (editor) => {
                 id: 'link',
                 title: 'Link',
                 icon: 'ri-link',
-                action: () => {
-                    dispatchLinkModal({isOpen: true});
+                action: e => {
+                    const { selection, state } = editor
+                    const { from, to } = selection;
+                    const text = state.doc.textBetween(from, to, ' ')
+                    dispatchLinkModal({isOpen: true, text});
                 },
             },
             {
@@ -26,10 +29,10 @@ const useMenuBar = (editor) => {
                 },
             },
             {
-                id: 'clearNodes',
+                id: 'clearContent',
                 title: 'Clear',
                 icon: 'ri-file-line',
-                action: () => editor.chain().focus().clearNodes().run(),
+                action: () => editor.chain().focus().clearContent().run(),
             },
             {
                 id: 'video',
