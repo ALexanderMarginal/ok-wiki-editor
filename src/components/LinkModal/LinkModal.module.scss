@@ -1,0 +1,82 @@
+.substrate {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+  position: absolute;
+  width: 200px;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 2px rgba(0,0,0,.47);
+}
+
+.header {
+  background: #f5f5f5;
+  padding: 5px;
+}
+
+.button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.body {
+  padding: 20px 10px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+  padding: 10px 5px;
+  border: 1px solid #b2b2b2;
+  position: relative;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.formGroupActive {
+  border-color: #0599f7;
+}
+
+.label {
+  position: absolute;
+  top: -8px;
+  left: 2px;
+  background-color: white;
+  color: #b2b2b2;
+  font-size: .75em;
+  display: none;
+}
+
+.labelActive {
+  display: block;
+}
+
+.input {
+  padding: 0;
+  border: none;
+  width: 100%;
+  outline: none;
+
+  &::placeholder {
+    color: #b2b2b2;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttonSubmit {
+  color: #0599f7;
+}

@@ -11,10 +11,22 @@ const useMenuBar = (editor) => {
                 title: 'Link',
                 icon: 'ri-link',
                 action: e => {
-                    const { selection, state } = editor
-                    const { from, to } = selection;
-                    const text = state.doc.textBetween(from, to, ' ')
-                    dispatchLinkModal({isOpen: true, text});
+                    const {state} = editor;
+                    const {from, to} = state.selection;
+                    const text = state.doc.textBetween(from, to, ' ');
+                    dispatchLinkModal({
+                        isOpen: true,
+                        text,
+                        target: e.currentTarget,
+                        cb: (link, text) => {
+                            editor.chain().focus()
+                                .deleteRange(from, to)
+                                .insertContent(text)
+                                .setTextSelection({from, to: from + text.length})
+                                .setLink({ href: link })
+                                .run();
+                        },
+                    });
                 },
             },
             {
@@ -49,13 +61,6 @@ const useMenuBar = (editor) => {
                     const cols = window.prompt('Cols') || 2;
                     editor.chain().focus().insertTable({rows, cols, withHeaderRow: true}).run();
                 },
-            },
-            {
-                id: 'code',
-                title: 'code',
-                icon: 'ri-code-view',
-                action: () => editor.chain().focus().toggleCode().run(),
-                withActiveClass: true,
             },
             {
                 id: 'plus',
