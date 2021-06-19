@@ -34,9 +34,9 @@
 
 .formGroup {
   margin-bottom: 20px;
-  padding: 10px 5px;
   border: 1px solid #b2b2b2;
   position: relative;
+  display: flex;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -62,10 +62,11 @@
 }
 
 .input {
-  padding: 0;
+  padding: 10px 5px;
   border: none;
   width: 100%;
   outline: none;
+  background: white;
 
   &::placeholder {
     color: #b2b2b2;

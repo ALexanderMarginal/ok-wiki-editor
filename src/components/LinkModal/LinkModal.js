@@ -24,7 +24,7 @@ const LinkModal = () => {
                             })}
                         >
                             <label className={classNames(styles.label, {
-                                [styles.labelActive]: focusedInput === name,
+                                [styles.labelActive]: value || focusedInput === name,
                             })}>
                                 {label}
                             </label>
