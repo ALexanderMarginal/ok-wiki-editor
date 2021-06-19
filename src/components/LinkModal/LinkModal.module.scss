@@ -16,7 +16,7 @@
   background: white;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 0 2px rgba(0,0,0,.47);
+  box-shadow: var(--shadow);
 }
 
 .header {
@@ -36,7 +36,7 @@
 
 .formGroup {
   margin-bottom: 20px;
-  border: 1px solid #b2b2b2;
+  border: 1px solid var(--color-secondary);
   position: relative;
   display: flex;
 
@@ -46,7 +46,7 @@
 }
 
 .formGroupActive {
-  border-color: #0599f7;
+  border-color: var(--color-primary);
 }
 
 .label {
@@ -54,7 +54,7 @@
   top: -8px;
   left: 2px;
   background-color: white;
-  color: #b2b2b2;
+  color: var(--color-secondary);
   font-size: .75em;
   display: none;
 }
@@ -71,7 +71,7 @@
   background: white;
 
   &::placeholder {
-    color: #b2b2b2;
+    color: var(--color-secondary);
   }
 }
 
@@ -81,5 +81,5 @@
 }
 
 .buttonSubmit {
-  color: $color-primary;
+  color: var(--color-primary);
 }

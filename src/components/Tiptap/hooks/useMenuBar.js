@@ -3,6 +3,7 @@ import {useMemo} from 'react';
 
 const useMenuBar = (editor) => {
     const dispatchLinkModal = useDispatch(dispatch => dispatch.linkModalForm.toggle);
+    const dispatchLinkContextMenu = useDispatch(dispatch => dispatch.linkContextMenu.toggle);
 
     const buttons = useMemo(() => {
         return editor ? [
@@ -11,6 +12,7 @@ const useMenuBar = (editor) => {
                 title: 'Link',
                 icon: 'ri-link',
                 action: e => {
+                    dispatchLinkContextMenu();
                     const {state} = editor;
                     const {from, to} = state.selection;
                     const text = state.doc.textBetween(from, to, ' ');

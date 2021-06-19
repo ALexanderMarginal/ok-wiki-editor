@@ -5,12 +5,18 @@ const linkModalForm = createForme({
     link: '',
     text: '',
     target: null,
+    withBack: false,
     cb: () => {
     },
 }, () => ({
     actions: {
         toggle(state, {
-            isOpen = false, link = '', text = '', target = null, cb = () => {
+            isOpen = false,
+            link = '',
+            text = '',
+            target = null,
+            withBack = false,
+            cb = () => {
             },
         } = {}) {
             return {
@@ -18,6 +24,7 @@ const linkModalForm = createForme({
                 link,
                 text,
                 target,
+                withBack,
                 cb,
             };
         },

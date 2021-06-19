@@ -4,12 +4,28 @@ import styles from './LinkModal.module.scss';
 import useLinkModal from './useLinkModal';
 
 const LinkModal = () => {
-    const {onInput, close, modalStyles, inputs, focusedInput, setFocusedInput, onSubmit} = useLinkModal();
+    const {
+        onInput,
+        close,
+        modalStyles,
+        inputs,
+        focusedInput,
+        setFocusedInput,
+        onSubmit,
+        withBack,
+    } = useLinkModal();
 
     return (
         <div onClick={close} className={styles.substrate} id="modalSubstrate">
             <div className={styles.modal} style={modalStyles}>
                 <div className={styles.header}>
+                    {withBack ? (
+                        <button
+                            className={styles.button}
+                        >
+                            <i className="ri-arrow-left-line" />
+                        </button>
+                    ) : null}
                     <button className={styles.button}>
                         <i className={'ri-search-line'} />
                         <i className="ri-arrow-down-s-fill" />

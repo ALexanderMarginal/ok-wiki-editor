@@ -10,10 +10,10 @@
   cursor: pointer;
 
   &:hover {
-    background: lightgray;
+    background: var(--color-secondary);
   }
 }
 
 .isActive {
-  background: lightgray;
+  background: var(--color-secondary);
 }

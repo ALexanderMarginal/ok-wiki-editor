@@ -8,7 +8,7 @@ import TableRow from '@tiptap/extension-table-row';
 import {useEditor} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import {useEffect, useRef} from 'react';
-import debounce from '../../../tools/debounce';
+import {throttle} from 'lodash';
 
 window.targets = [];
 
@@ -28,17 +28,18 @@ export default function useTiptap() {
         ],
         content: '<p>Hello World! 🌎️</p>',
     });
-    const dispatchLinkModal = useDispatch(dispatch => dispatch.linkModalForm.toggle);
+    const dispatchLinkContextMenu = useDispatch(dispatch => dispatch.linkContextMenu.toggle);
     const editorRef = useRef(null);
 
     const onMouseMove = e => {
-        if (e.target.localName === 'a') {
-            return;
-            dispatchLinkModal({})
-        }
+        const showContextMenu = e.target.localName === 'a';
+        dispatchLinkContextMenu({
+            isShow: showContextMenu,
+            target: showContextMenu ? e.target : null,
+        });
     };
 
-    const onMouseMoveDebounced = debounce(onMouseMove, 1000);
+    const onMouseMoveDebounced = throttle(onMouseMove, 2000);
 
     useEffect(() => {
         const {current} = editorRef;

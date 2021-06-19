@@ -7,14 +7,16 @@ import {useMemo, useState} from 'react';
  * close: function,
  * modalStyles: {},
  * inputs: {name: string, value: string, label: string}[],
+ * withBack: boolean,
  * focusedInput: string|null,
  * setFocusedInput: function,
  * onSubmit: function,
+ * back: function
  * }}
  */
 export default function useLinkModal() {
     const dispatchLinkModal = useDispatch(dispatch => dispatch.linkModalForm.toggle);
-    const {text, link, isOpen, target, cb} = useSelect(root => root.linkModalForm);
+    const {text, link, isOpen, target, cb, withBack} = useSelect(root => root.linkModalForm);
 
     const [focusedInput, setFocusedInput] = useState(null);
 
@@ -61,5 +63,14 @@ export default function useLinkModal() {
         dispatchLinkModal();
     };
 
-    return {onInput, close, modalStyles, inputs, focusedInput, setFocusedInput, onSubmit};
+    return {
+        onInput,
+        close,
+        modalStyles,
+        inputs,
+        focusedInput,
+        setFocusedInput,
+        onSubmit,
+        withBack,
+    };
 }
