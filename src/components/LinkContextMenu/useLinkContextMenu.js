@@ -72,9 +72,10 @@ export default function useLinkContextMenu(editor, editorRef) {
                 title: 'Unlink',
                 icon: 'ri-link-unlink-m',
                 action: () => {
-                    const {end} = getPositions(editorRef.current, target);
+                    const {start, end} = getPositions(editorRef.current, target.innerText);
                     editor.chain()
-                        .focus(end)
+                        .focus()
+                        .setTextSelection({from: start + 1, to: end + 1})
                         .unsetLink()
                         .focus(end + 1)
                         .run();
