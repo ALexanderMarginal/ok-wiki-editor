@@ -50,11 +50,6 @@ export default function useLinkContextMenu(editor, editorRef) {
                         link: target.getAttribute('href'),
                         withBack: true,
                         cb: (link, text) => {
-                            window.editor = editor;
-                            window.start = start;
-                            window.end = end;
-                            window.link = link;
-                            window.text = text;
                             editor.chain()
                                 .focus()
                                 .setTextSelection({from: start + 1, to: end + 1})
