@@ -3,15 +3,14 @@ import {useMemo} from 'react';
 
 /**
  * @param {HTMLElement} area
- * @param {HTMLElement} el
+ * @param {string} text
  * @return {{start: number, end: number}}
  */
-const getPositions = (area, el) => {
-    const targetText = el.innerText;
-    const start = area.innerText.indexOf(targetText);
-    const end = start + targetText.length;
+const getPositions = (area, text) => {
+    const start = area.innerText.indexOf(text);
+    const end = start + text.length;
     return {start, end};
-}
+};
 
 /**
  * @param {Editor} editor
@@ -43,7 +42,7 @@ export default function useLinkContextMenu(editor, editorRef) {
                 title: 'Edit link',
                 icon: 'ri-pencil-line',
                 action: () => {
-                    const {start, end} = getPositions(editorRef.current, target);
+                    const {start, end} = getPositions(editorRef.current, target.innerText);
                     dispatchLinkModal({
                         isOpen: true,
                         text: target.innerText,
@@ -51,14 +50,22 @@ export default function useLinkContextMenu(editor, editorRef) {
                         link: target.getAttribute('href'),
                         withBack: true,
                         cb: (link, text) => {
-                            debugger;
+                            window.editor = editor;
+                            window.start = start;
+                            window.end = end;
+                            window.link = link;
+                            window.text = text;
                             editor.chain()
-                                .focus(end)
-                                .unsetLink()
-                                .deleteRange(start, end)
-                                .focus(start)
+                                .focus()
+                                .setTextSelection({from: start + 1, to: end + 1})
+                                .deleteSelection()
                                 .insertContent(text)
-                                .setTextSelection({start, to: start + text.length + 1})
+                                .run();
+
+                            const {start: textStart, end: textEnd} = getPositions(editorRef.current, text);
+                            editor.chain()
+                                .focus()
+                                .setTextSelection({from: textStart + 1, to: textEnd + 1})
                                 .setLink({ href: link })
                                 .run();
                         },
