@@ -1,6 +1,10 @@
 import {useDispatch} from '@statirjs/react';
 import {useMemo} from 'react';
 
+/**
+ * @param {Editor} editor
+ * @return {{buttons: {id: string, title: string, icon: string, action: function}[]}}
+ */
 const useMenuBar = (editor) => {
     const dispatchLinkModal = useDispatch(dispatch => dispatch.linkModalForm.toggle);
     const dispatchLinkContextMenu = useDispatch(dispatch => dispatch.linkContextMenu.toggle);
@@ -71,7 +75,7 @@ const useMenuBar = (editor) => {
                 action: () => window.alert('More actions'),
             },
         ].map(button => ({...button, key: `${button.id}_${button.title}`})) : [];
-    }, [editor, dispatchLinkModal]);
+    }, [editor, dispatchLinkModal, dispatchLinkContextMenu]);
 
     return {buttons};
 };
